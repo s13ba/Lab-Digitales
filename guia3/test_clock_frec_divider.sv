@@ -1,7 +1,6 @@
 `timescale 1ns / 1ps //Frecuencia: 10ns=100MHz
-/*
-//Pregunta 5.3 gu�a 3
-//testbench para el divisor de frecuencias modificado
+//Pregunta 5.3 guía 3
+//Divisor de frecuencias que suelta señales a 50, 30, 10 y 1 MHz
 
 module Clock_freq_divider();
     
@@ -39,4 +38,3 @@ module Clock_freq_divider();
       end
             
 endmodule
-*/
