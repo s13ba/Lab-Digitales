@@ -4,13 +4,13 @@
 // Course: ELO212
 // Students: 
 // 
-// Create Date: 
+// Create Date: 04/05/2022
 // Design Name: Guia 4
 // Module Name: S4_actividad2
-// Project Name: 
+// Project Name: Contador_N_bits
 // Target Devices: xc7a100tcsg324-1
 // Tool Versions: Vivado 2021.1
-// Description: 
+// Description: Contador incremental/decremental binario de ancho parametrizable. Cuenta con una entrada 
 // 
 // Dependencies: 
 // 
@@ -21,7 +21,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Contador_N_bits #(parameter N=32)(
+module S4_actividad2 #(parameter N=32)(
 	input logic clock, reset, dec, enable, load,
 	input logic [N-1:0] load_value,
 	output logic [N-1:0]counterN
