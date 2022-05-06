@@ -33,8 +33,7 @@ module ALU_test();
 		.B(B),
 		.OpCode(OpCode),
 		.Result(Result),
-		.Status(Status)/*,
-		.resultado(resultado)*/
+		.Status(Status)
 		);
 	
 	initial begin
