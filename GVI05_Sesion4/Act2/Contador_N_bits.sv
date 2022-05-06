@@ -1,14 +1,15 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// University: Universidad Tecnica Federico Santa Maria
+// Course: ELO212
+// Students: 
 // 
-// Create Date: 04.05.2022 23:08:13
-// Design Name: 
-// Module Name: Contador_N_bits
+// Create Date: 
+// Design Name: Guia 4
+// Module Name: S4_actividad2
 // Project Name: 
-// Target Devices: 
-// Tool Versions: 
+// Target Devices: xc7a100tcsg324-1
+// Tool Versions: Vivado 2021.1
 // Description: 
 // 
 // Dependencies: 
@@ -27,24 +28,24 @@ module Contador_N_bits #(parameter N=32)(
 
 	);
 	always_ff@(posedge clock) begin					//flip flop que se activa con cantos de subida de clk
-		if (reset) begin					//el reset tiene prioridad por sobre todas las otras seÒales
+		if (reset) begin					//el reset tiene prioridad por sobre todas las otras se√±ales
 			counterN=0;
 		end
-		else if (load) begin					//si load est· en alto, independiente de si enable tambiÈn lo est·, counterN=load_value
+		else if (load) begin					//si load est√° en alto, independiente de si enable tambi√©n lo est√°, counterN=load_value
 			counterN = load_value;
 		end				
-		else if (enable*~load) begin			//solo si load est· en bajo a la vez que enable est· en alto, se procede con las otras opciones
-			if (dec) begin					//si dec est· en alto, el contador opera de manera decremental
+		else if (enable*~load) begin			//solo si load est√° en bajo a la vez que enable est√° en alto, se procede con las otras opciones
+			if (dec) begin					//si dec est√° en alto, el contador opera de manera decremental
 				counterN = counterN - 1;
 			end
-			else begin					//si dec est· en bajo, opera de manera incremental
+			else begin					//si dec est√° en bajo, opera de manera incremental
 				counterN = counterN + 1;
 			end
 		end
-		else if (dec*~load*~enable) begin //si solamente dec est· en alto, el contador se mantiene con su valor anterior
+		else if (dec*~load*~enable) begin //si solamente dec est√° en alto, el contador se mantiene con su valor anterior
 			counterN = counterN;
 		end
-		else begin						//si no hay ninguna seÒal en alto, el contador se queda igual
+		else begin						//si no hay ninguna se√±al en alto, el contador se queda igual
 			counterN = counterN;
 		end
 	end
