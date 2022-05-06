@@ -7,7 +7,7 @@
 // Create Date: 04.05.2022 23:57:11
 // Design Name: Contador_N_bits_testbench
 // Module Name: Contador_N_bits_testbench
-// Project Name: Contador_N_bits_testbench
+// Project Name: Contador_N_bits
 // Target Devices: xc7a100tcsg324-1
 // Tool Versions: Vivado 2021.1
 // Description: Testbench para el módulo S4_actividad2
