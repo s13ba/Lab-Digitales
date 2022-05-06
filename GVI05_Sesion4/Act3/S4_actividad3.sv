@@ -31,8 +31,8 @@ module S4_actividad3 #(parameter M = 8)(
  	logic[M:0] resultado; 
 
 	always_comb begin
-	Result=0;  //valores iniciales para evitar latches
-	Status=0;  //Como todo es cero (incluyendo el flag Z), la salida de TODOS ceros se puede interpretar como un error
+	//Result=0;  //valores iniciales para evitar latches
+	//Status=0;  //Como todo es cero (incluyendo el flag Z), la salida de TODOS ceros se puede interpretar como un error
 	
 		if ( OpCode == 2'b00 ) begin						//OpCode = 00, se suma.
 			resultado = A + B;
@@ -70,7 +70,7 @@ module S4_actividad3 #(parameter M = 8)(
 		end
 
 
-		if ( OpCode == 2'b01 ) begin								//Si OpCode es 01, se resta A y B.
+		else if ( OpCode == 2'b01 ) begin								//Si OpCode es 01, se resta A y B.
 			resultado = A - B;
 			Result = resultado[M-1:0];
 			
@@ -106,7 +106,7 @@ module S4_actividad3 #(parameter M = 8)(
             end
     
 
-		if ( OpCode == 2'b10 ) begin								//Si OpCode es 10, se hace el OR entre A y B.
+		else if ( OpCode == 2'b10 ) begin								//Si OpCode es 10, se hace el OR entre A y B.
 			Result = A | B;	
 			Status[0] = 0;									//C y V permanecen apagados.
 			Status[1] = 0;
@@ -125,7 +125,7 @@ module S4_actividad3 #(parameter M = 8)(
 		end
 
 
-		if ( OpCode == 2'b11 ) begin								//Si OpCode es 11, se hace el AND entre A y B.
+		else if ( OpCode == 2'b11 ) begin								//Si OpCode es 11, se hace el AND entre A y B.
 			Result = A & B;								
 			Status[0] = 0;									//C y V permanecen apagados
 			Status[1] = 0;
@@ -141,6 +141,10 @@ module S4_actividad3 #(parameter M = 8)(
 			end else begin
 				Status[3] = 0;
 			end
+		end
+		else begin
+		  	   Result=0;  //valores iniciales para evitar latches
+	           Status=0;
 		end
 	end   
     
