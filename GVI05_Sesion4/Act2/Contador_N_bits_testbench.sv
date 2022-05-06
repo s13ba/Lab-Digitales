@@ -10,7 +10,7 @@
 // Project Name: Contador_N_bits_testbench
 // Target Devices: xc7a100tcsg324-1
 // Tool Versions: Vivado 2021.1
-// Description: Testbench para el módulo Contador_N_bits
+// Description: Testbench para el módulo S4_actividad2
 // 
 // Dependencies: Lab Digitales
 // 
