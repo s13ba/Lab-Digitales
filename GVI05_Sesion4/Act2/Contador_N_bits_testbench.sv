@@ -25,7 +25,7 @@ module Contador_N_bits_testbench();
 	logic clock, reset, dec, enable, load;
 	logic [31:0] load_value, counterN;
 
-	Contador_N_bits #(.N(32)) DUT(
+	S4_actividad2 #(.N(32)) DUT(
 		.clock(clock),
 		.reset(reset),
 		.dec(dec),
