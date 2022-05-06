@@ -25,14 +25,15 @@ module S4_actividad1(
     input  logic        clock,
     input  logic        reset,
     input  logic [31:0] BCD_in,
-    output logic [6:0]  segments,
-    output logic [7:0]  anodos
+    output logic [6:0]  segments,   // {CA, CB, CC, CD, CE, CF, CG}
+    output logic [7:0]  anodos      // {AN7, AN6, AN5, AN4, AN3, AN2, AN1, AN0}
     );
     
     //***Primera parte: Separar digitos del numero, convertir 1 digito a 7seg por la vez***
     
     //Digitos (hex) del numero ingresado:
-    
+    logic [3:0]sevenSeg_in; //Cable que conecta Mux con conversor BCD->7Seg
+    logic [2:0]sel; //sel coordina al decodificador y al mux que maneja los digitos
     logic [3:0] BCD_1, BCD_2, BCD_3, BCD_4,
                 BCD_5, BCD_6, BCD_7, BCD_8;
 
@@ -46,7 +47,7 @@ module S4_actividad1(
     assign BCD_7 = BCD_in[27:24];
     assign BCD_8 = BCD_in[31:28];    
     
-    mux_8_1 mux_8_1(
+    mux_8_1 mux_8_1(                    //mux para separar digitos
          .A(BCD_1),
          .B(BCD_2),
          .C(BCD_3),
@@ -59,25 +60,21 @@ module S4_actividad1(
          .out(sevenSeg_in)
          );  
     
-    logic [3:0]sevenSeg_in; //Cable que conecta Mux con conversor BCD->7Seg
-    
-    BCD_to_sevenSeg BCD_to_sevenSeg(
-        .BCD_in(sevenSeg_in),//No confundir pin de entrada del conversor con el numero que viene de afuera. 
-                            //Considerar cambiar el nombre si trae conflictos
+    BCD_to_sevenSeg BCD_to_sevenSeg(    //conversor por digitos
+        .BCD_in(sevenSeg_in),
         .sevenSeg(segments)
         );
         
+        
     //***Segunda parte: mostrar un numero unico y escoger su display***
     
-    logic [2:0]sel; //sel coordina al decodificador y al mux que maneja los digitos
-    
-    nbit_counter#(.N(3)) counter_3_bit(
+    nbit_counter#(.N(3)) counter_3_bit( //contador que coordina al mux y al decodificador 
          .clk(clock),
          .reset(reset),
          .count(sel)
          ); 
         
-    deco_binario_3_cold decoder(
+    deco_binario_3_cold decoder(        //decodificador que maneja los anodos
         .sel(sel),
         .out(anodos)
         );
