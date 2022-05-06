@@ -2,7 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 // University: Universidad Tecnica Federico Santa Maria
 // Course: ELO212
-// Students: 
+// Students: Cristobal Caqueo, Bastian Rivas, Claudio Zanetta
 // 
 // Create Date: 04/05/2022
 // Design Name: Guia 4
@@ -10,13 +10,14 @@
 // Project Name: Contador_N_bits
 // Target Devices: xc7a100tcsg324-1
 // Tool Versions: Vivado 2021.1
-// Description: Contador incremental/decremental binario de ancho parametrizable. Cuenta con una entrada 
-// 
-// Dependencies: 
+// Description: Contador incremental/decremental binario de ancho parametrizable.
+// Dependencies: Lab Digitales
 // 
 // Revision:
 // Revision 0.01 - File Created
-// Additional Comments:
+// Additional Comments: Posee 4 estados determinados por sus 4 entradas: reset, que deja el contador en cero; load, que carga un valor desde load_value;
+//			enable, que determina si se realiza conteo o se mantiene el último valor registrado; dec, cual en un valor alto cuenta
+//			decrementalmente y en un valor bajo, incrementalmente.
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
