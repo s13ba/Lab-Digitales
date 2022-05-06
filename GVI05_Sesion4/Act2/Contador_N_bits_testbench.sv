@@ -1,19 +1,20 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// University: Universidad Tecnica Federico Santa Maria
+// Course: ELO212
+// Students: Cristobal Caqueo, Bastian Rivas, Claudio Zanetta
 // 
 // Create Date: 04.05.2022 23:57:11
-// Design Name: 
-// Module Name: test_cont_n_bit
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
+// Design Name: Contador_N_bits_testbench
+// Module Name: Contador_N_bits_testbench
+// Project Name: Contador_N_bits_testbench
+// Target Devices: xc7a100tcsg324-1
+// Tool Versions: Vivado 2021.1
+// Description: Testbench para el módulo Contador_N_bits
 // 
-// Dependencies: 
+// Dependencies: Lab Digitales
 // 
-// Revision:
+// Revision: 0.01
 // Revision 0.01 - File Created
 // Additional Comments:
 // 
@@ -33,7 +34,7 @@ module Contador_N_bits_testbench();
 		.load_value(load_value),
 		.counterN(counterN)
 		);
-    always #5 clock=~clock;         //se�al de clock
+    always #5 clock=~clock;         //señal de clock
 	initial begin
 
         clock = 0;
