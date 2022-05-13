@@ -22,12 +22,12 @@
 
 //Ver como parametrizar!!! Por defecto: 16 bits
 
-module 7_seg_driver(
+module driver_7_seg(
     input  logic        clock,
     input  logic        reset,
     input  logic [15:0] BCD_in,
     output logic [6:0]  segments,   // {CA, CB, CC, CD, CE, CF, CG}
-    output logic [3:0]  anodos      // {AN7, AN6, AN5, AN4, AN3, AN2, AN1, AN0}
+    output logic [7:0]  anodos      // {AN7, AN6, AN5, AN4, AN3, AN2, AN1, AN0}
     );
     // nro anodos=nroBCD/4
 

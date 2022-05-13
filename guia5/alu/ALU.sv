@@ -21,7 +21,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module ALU #(parameter M = 8)(
+module ALU #(parameter M = 8, S = 2)(
     input  logic [M-1:0]    A, B,
     input  logic [1:0]      OpCode,       
     output logic [M-1:0]    Result,
