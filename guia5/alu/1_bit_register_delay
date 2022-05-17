@@ -1,4 +1,5 @@
-module 1_bit_register_delay (
+`timescale 1ns / 1ps
+module register_1_bit_delay (
 	input logic clk, D, reset, enable,
 	output logic Q
 
@@ -8,11 +9,14 @@ module 1_bit_register_delay (
 	
 	always_ff @(posedge clk) begin
 		if (reset) begin
-			shift_reg = 'b0;
+			shift_reg <= 'b0;
 		end else if (enable) begin
-			shift_reg = {shift_reg[30:0], D};
+			shift_reg <= {shift_reg[30:0], D};
 		end else begin
-			shift_reg = shift_reg;
-		assign Q = shift_reg[31];
-	end
+			shift_reg <= shift_reg;
+		end
+    end
+    
+    assign Q = shift_reg[31];
 endmodule
+		

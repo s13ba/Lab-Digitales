@@ -1,4 +1,23 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ps//////////////////////////////////////////////////////////////////////////////////
+// University: Universidad Tecnica Federico Santa Maria
+// Course: ELO212
+// Students: Cristobal Caqueo, Bastian Rivas, Claudio Zanetta
+// 
+// Create Date: 10/05/2022
+// Design Name: guia5_alu
+// Module Name: ALU_reg
+// Project Name: guia5_alu
+// Target Devices: xc7a100tcsg324-1
+// Tool Versions: Vivado 2021.1
+// Description: ALU con registros que almacenan inputs y outputs
+// Dependencies: Lab Digitales
+// 
+// Revision: 1.11 
+// Revision 1.11 - Intercambiadas los nombres de Anodes/anodos en lineas 95~96
+// Additional Comments: 
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
 module ALU_reg #(parameter N = 16) (
 	input logic [N-1:0]data_in,
 	input logic clk, reset, load_A, load_B, load_Op, updateRes,
@@ -8,7 +27,7 @@ module ALU_reg #(parameter N = 16) (
 
 	);
 
-    logic [1:0] data_Op;
+    logic [1:0] data_Op; //00: Suma, 01: Resta, 10: OR por bit, 11: AND por bit
 	assign data_Op = data_in [1:0];
 	logic [N-1 : 0] A;
 	logic [N-1 : 0] B;
@@ -73,7 +92,8 @@ module ALU_reg #(parameter N = 16) (
 		.reset(reset),
 		.BCD_in(SevenSegIn),
 		.segments(Segments),
-		.anodos(Anodes)
+		//.anodos(Anodes)
+		.Anodes(anodos)
 
 	);
 	
