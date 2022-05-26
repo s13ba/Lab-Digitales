@@ -8,11 +8,11 @@ module registro_1_bit #(parameter N=1)(
 
 	always_ff @(posedge clk) begin
 		if (reset) begin
-			Q <= 1'b0;
+			Q = 1'b0;
 		end else if (load) begin
-			Q <= D;
+			Q = D;
 		end else begin
-			Q <= Q;
+			Q = Q;
 		end
 	end
 endmodule

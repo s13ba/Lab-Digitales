@@ -14,8 +14,7 @@
 // 
 // Dependencies: Lab Digitales
 // 
-// Revision: 1.0 
-// Revision 0.01 - File Created
+// Revision: 1.01 - Parchado el ancho de sel (2b -> 3b)
 // Additional Comments: Puede recibir un numero de hasta 32 bits y rellena los no
 //                      utilizados con ceros
 // 
@@ -45,11 +44,12 @@ module driver_7_seg#(parameter N = 16)(
     
     //Digitos (hex) del numero ingresado:
     logic [3:0]sevenSeg_in; //Cable que conecta Mux con conversor BCD->7Seg
-    logic [1:0]sel; //sel coordina al decodificador y al mux que maneja los digitos
+    logic [2:0]sel; //sel coordina al decodificador y al mux que maneja los digitos
     logic [3:0] BCD_1, BCD_2, BCD_3, BCD_4,
                 BCD_5, BCD_6, BCD_7, BCD_8;
+    logic [7:0] deco_out;
 
-//Parametrizar!!!
+//Separacion por digito. BCD_n es el digito n
     assign BCD_1 = data[3:0]; 
     assign BCD_2 = data[7:4];
     assign BCD_3 = data[11:8];
@@ -93,7 +93,23 @@ module driver_7_seg#(parameter N = 16)(
         
     deco_binario_3_cold decoder(        //decodificador que maneja los anodos
         .sel(sel),
-        .out(anodos)
+        .out(deco_out)
         );
+
+    // Limitar numero de displays a encenderse
+
+    logic [7:0] controlAnodos;
+    logic [3:0] LSBdeco_out;
+    assign LSBdeco_out = deco_out[3:0];
+    assign controlAnodos = {4'b1111, LSBdeco_out};
+    
+    always_comb begin
+        case (N)
+            16: anodos = controlAnodos;
+            32: anodos = deco_out;
+        
+        default: anodos = deco_out;
+        endcase
+    end
     
 endmodule
