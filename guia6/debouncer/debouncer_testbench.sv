@@ -44,6 +44,21 @@ module debouncer_testbench();
 		#3  PB = 1'b0;
 		#20 PB = 1'b1;
 		#80 PB = 1'b0;
+//PB caotico
+		#25 PB = 1'b1;
+		#15 PB = 1'b0;
+		#7 PB = 1'b1;
+		#69 PB = 1'b0;
+		#3 PB = 1'b1;
+		#3 PB = 1'b0;
+		#3 PB = 1'b1;
+		#3 PB = 1'b0;
+		#3 PB = 1'b1;
+		#3 PB = 1'b0;
+		#3 PB = 1'b1;
+		#3 PB = 1'b0;
+		
+
 	end
 
 endmodule

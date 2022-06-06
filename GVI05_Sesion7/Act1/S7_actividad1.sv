@@ -2,25 +2,25 @@
 //////////////////////////////////////////////////////////////////////////////////
 // University: Universidad Tecnica Federico Santa Maria
 // Course: ELO212
-// Students: 
+// Students: Cristobal Caqueo, Bastian Rivas, Claudio Zanetta
 // 
-// Create Date: 
+// Create Date: 05/06/2022
 // Design Name: Guia 7
 // Module Name: S7_actividad1
-// Project Name: 
+// Project Name: Guia7
 // Target Devices: xc7a100tcsg324-1
 // Tool Versions: Vivado 2021.1
-// Description: 
+// Description: Conversor de nibbles a numeros legibles en displays de 7 segmentos
 // 
-// Dependencies: 
+// Dependencies: Lab Digitales
 // 
-// Revision:
+// Revision: 0.01
 // Revision 0.01 - File Created
-// Additional Comments:
-// 
+// Additional Comments: 
+//
 //////////////////////////////////////////////////////////////////////////////////
 
-
+// Módulo principal: 
 module S7_actividad1 #(parameter N_DEBOUNCER = 10)(
     input  logic        clk,
     input  logic        resetN,
@@ -34,3 +34,4 @@ module S7_actividad1 #(parameter N_DEBOUNCER = 10)(
 
     
 endmodule
+
