@@ -27,7 +27,7 @@ ALU_reg_mod uALU_reg_mod # (
   .N                       (16)
 )                          (
   .clk                     (clk),
-  .resetN                  (resetN),
+  .reset                  (reset),
   .LoadOpA                 (LoadOpA),
   .LoadOpB                 (LoadOpB),
   .LoadOpCode              (LoadOpCode),
@@ -40,7 +40,7 @@ ALU_reg_mod uALU_reg_mod # (
 
 // Modulo principal: ALU con registros
 module ALU_reg_mod #(parameter N = 16) (
-	input logic clk, resetN, LoadOpA, LoadOpB, LoadOpCode, updateRes,
+	input logic clk, reset, LoadOpA, LoadOpB, LoadOpCode, updateRes,
 	input logic	 [N-1:0]	DataIn,
 	output logic [3:0] 		Flags,
 	output logic [N-1:0]	Result
@@ -56,7 +56,7 @@ module ALU_reg_mod #(parameter N = 16) (
 	registro_n_bit # (.N(N)) registro_A (
 		.D              (DataIn),
 		.clk            (clk),
-		.reset          (resetN),
+		.reset          (reset),
 		.load           (LoadOpA),
 		.Q              (A)
 	);
@@ -64,7 +64,7 @@ module ALU_reg_mod #(parameter N = 16) (
 	registro_n_bit # (.N(N)) registro_B (
 		.D              (DataIn),
 		.clk            (clk),
-		.reset          (resetN),
+		.reset          (reset),
 		.load           (LoadOpB),
 		.Q              (B)
 	);
@@ -72,7 +72,7 @@ module ALU_reg_mod #(parameter N = 16) (
 	registro_n_bit # (.N(2)) registro_Op (
 		.D              (data_Op),
 		.clk            (clk),
-		.reset          (resetN),
+		.reset          (reset),
 		.load           (LoadOpCode),
 		.Q              (Op)
 	);
@@ -91,7 +91,7 @@ module ALU_reg_mod #(parameter N = 16) (
 	registro_n_bit # (.N(N)) registro_Result (
 		.D              (ALU_Result),
 		.clk            (clk),
-		.reset          (resetN),
+		.reset          (reset),
 		.load           (updateRes),
 		.Q              (Result)
 	);
@@ -100,7 +100,7 @@ module ALU_reg_mod #(parameter N = 16) (
 	registro_n_bit # (.N(4)) registro_Flags(
 		.D              (ALU_Flags),
 		.clk            (clk),
-		.reset          (resetN),
+		.reset          (reset),
 		.load           (updateRes),
 		.Q              (Flags)
 	);

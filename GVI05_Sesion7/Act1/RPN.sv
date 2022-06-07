@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ps/*
 //////////////////////////////////////////////////////////////////////////////////
 // University: Universidad Tecnica Federico Santa Maria
 // Course: ELO212
@@ -79,4 +79,4 @@ module RPN
 			new_outp2 <= outp2; ...
 		end
 
- endmodule
+ endmodule*/
