@@ -27,7 +27,7 @@ ALU_reg_mod uALU_reg_mod # (
   .N                       (16)
 )                          (
   .clk                     (clk),
-  .reset                  (reset),
+  .reset                   (reset),
   .LoadOpA                 (LoadOpA),
   .LoadOpB                 (LoadOpB),
   .LoadOpCode              (LoadOpCode),
@@ -110,6 +110,7 @@ endmodule
 
 // *** Modulos auxiliares *** //
 
+/*
 
 //Contador de N bits (por defecto 4)
 //Pregunta 3.7 guía 2
@@ -128,7 +129,9 @@ module nbit_counter #(parameter N=4)(
     end
 endmodule
 
+*/
 
+/*
 
 //////////////////////////////////////////////////////////////////////////////////
 // University: Universidad Tecnica Federico Santa Maria
@@ -171,6 +174,10 @@ module mux_8_1#(parameter N = 3)(	//8 entradas, 1 salida
     end
 endmodule
 
+*/
+
+
+/*
 
 //////////////////////////////////////////////////////////////////////////////////
 // University: Universidad Tecnica Federico Santa Maria
@@ -215,6 +222,10 @@ module deco_binario_3_cold#(parameter N = 3)(
     
 endmodule
 
+*/
+
+
+/*
 
 //////////////////////////////////////////////////////////////////////////////////
 // University: Universidad Tecnica Federico Santa Maria
@@ -267,6 +278,7 @@ module BCD_to_sevenSeg(
     end
 endmodule
 
+*/
 
 //////////////////////////////////////////////////////////////////////////////////
 // University: Universidad Tecnica Federico Santa Maria
@@ -443,6 +455,8 @@ endmodule
 
 //Maximo: 32 bits
 
+/*
+
 module driver_7_seg#(parameter N = 16, count_max = 2)(
     input  logic        clk,
     input  logic        reset,
@@ -535,7 +549,7 @@ module driver_7_seg#(parameter N = 16, count_max = 2)(
     
 endmodule
 
-
+*/
 
 module registro_n_bit #(parameter N=1)(
 	input logic [N-1:0] D, 
