@@ -5,7 +5,7 @@
 // 
 // Create Date: 06.06.2022 21:57:28
 // Design Name: 
-// Module Name: ReversePolishFSM
+// Module Name: ReversePolishFSM_Undo
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module ReversePolishFSM(
+module ReversePolishFSM_Undo(
     input logic clk, Reset, Enter_pulse, deb_undo,
     output logic [2:0]Status,
     output logic LoadOpA, LoadOpB, LoadOpCode, ToDisplaySel, updateRes
