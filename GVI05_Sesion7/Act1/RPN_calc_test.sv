@@ -211,7 +211,7 @@ module RPN_calc_test();
         //Volver al estado inicial:
         Enter   = 1;
         #50 Enter = 0;
-        #15
+        
 
         // Calcular con las 4 operaciones:
         // Repite lo anterior pero para todas las operaciones
