@@ -44,9 +44,7 @@ module RPN_calc_test();
     .Enter          (Enter),
     .DataIn         (DataIn),
     .ToDisplay      (ToDisplay),
-
     .Flags          (Flags),
-
     .Status         (Status)
 );
 
@@ -83,6 +81,11 @@ module RPN_calc_test();
         #48 Enter = 0;
         #15
 
+        //Volver al estado inicial:
+        Enter   = 1;
+        #50 Enter = 0;
+        #15
+
         // Calcular con las 4 operaciones:
         // Repite lo anterior pero para todas las operaciones
 
@@ -92,7 +95,7 @@ module RPN_calc_test();
 
         DataIn  = 16'hFFFF;
         Enter   = 1;
-        #48 Enter = 0;
+        #50 Enter = 0;
         #15
 
         // Carga de datos en B:
@@ -107,6 +110,11 @@ module RPN_calc_test();
         DataIn  = 16'h0001;
         Enter   = 1;
         #48 Enter = 0;
+        #15
+
+        //Volver al estado inicial:
+        Enter   = 1;
+        #50 Enter = 0;
         #15
 
     // OR:
@@ -132,6 +140,11 @@ module RPN_calc_test();
         #48 Enter = 0;
         #15
 
+        //Volver al estado inicial:
+        Enter   = 1;
+        #50 Enter = 0;
+        #15
+
     // AND:
 
         // Carga de datos en A:
@@ -155,9 +168,14 @@ module RPN_calc_test();
         #48 Enter = 0;
         #15
 
+        //Volver al estado inicial:
+        Enter   = 1;
+        #50 Enter = 0;
+        #15
+
         // Reset:
 
-        #20
+        #20 
 
         resetN = 0;
 
