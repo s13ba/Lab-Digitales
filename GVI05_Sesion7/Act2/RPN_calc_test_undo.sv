@@ -125,7 +125,7 @@ module RPN_calc_test_undo();
         DataIn  = 16'hFEFE;
         Enter   = 1;
         #48 Enter = 0;
-        #10
+        #20
 
         // Carga de datos en B:
 

@@ -65,7 +65,7 @@ module S7_act3_testbench();
 
 	#5
 
-		DataIn = 4'hFFFF;			//Se debe ver 0000FFFF en los displays
+		DataIn = 16'hFFFF;			//Se debe ver 0000FFFF en los displays
 
 	#15
 
@@ -79,7 +79,7 @@ module S7_act3_testbench();
 	#48						//Enter debe estar en alto lo suficiente para que alcance a ser detectado por el debouncer
 	
 		Enter = 0;
-		DataIn = 4'h005A;			//Se debe ver 0000005A en los displays
+		DataIn = 16'h005A;			//Se debe ver 0000005A en los displays
 
 	#15
 
@@ -93,7 +93,7 @@ module S7_act3_testbench();
 	#48
 
 		Enter = 0;
-		DataIn = 4'h0001;			//Se debe ver 00000001 en los displays
+		DataIn = 16'h0001;			//Se debe ver 00000001 en los displays
 							//Operación: Resta
 	#15
 
