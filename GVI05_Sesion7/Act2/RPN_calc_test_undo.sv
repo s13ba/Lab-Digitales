@@ -134,13 +134,15 @@ module RPN_calc_test_undo();
         #48 Enter = 0;
         #15
 
-        // Carga de datos en Op y mostrar resultados:
+        // Carga de datos en Op pulsando Enter y Undo al mismo tiempo
 
         DataIn  = 16'h0001;
         Enter   = 1;
-        #48 Enter = 0;
+        Undo    = 1;
+        #48 Enter = 0; Undo = 0;
         #15
         
+    
 
         // Reset:
 
