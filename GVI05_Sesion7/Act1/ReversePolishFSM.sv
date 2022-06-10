@@ -102,7 +102,6 @@ module ReversePolishFSM(
                  next_state = S6;
              end
              S6: begin
-                next_state = S0;
                 Status = 3'b110;
                 LoadOpA = 1'b0;
                 LoadOpB = 1'b0;
