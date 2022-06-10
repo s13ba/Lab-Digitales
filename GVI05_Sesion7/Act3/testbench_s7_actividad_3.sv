@@ -1,3 +1,26 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// University: Universidad Tecnica Federico Santa Maria
+// Course: ELO212
+// Students: Cristobal Caqueo, Bastian Rivas, Claudio Zanetta
+// 
+// Create Date: 3/06/2022
+// Design Name: RPN_calc
+// Module Name: RPN_calc_test
+// Project Name: guia7
+// Target Devices: xc7a100tcsg324-1
+// Tool Versions: Vivado 2021.1
+// Description: Testbench para la calculadora RPN de la primera pregunta de la guia 7
+// 
+// Dependencies: Lab Digitales
+// 
+// Revision: 0.11
+// Revision 0.01
+//
+// Additional Comments: 
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
 module S7_act3_testbench();
 	logic clk, resetN, Enter, Undo, DisplayFormat;
 	logic [15:0] DataIn;
@@ -6,7 +29,9 @@ module S7_act3_testbench();
 	logic [3:0] Flags;
 	logic [2:0] Status;					//Se declaran las señales de entrada al módulo
 
-	S7_Actividad_3 #(N_DEBOUNCER = 10) DUT (
+	S7_Actividad_3 #(
+	.N_DEBOUNCER (10)
+	) DUT (
 		
 		.clk(clk),
 		.resetN(resetN),
@@ -94,8 +119,8 @@ module S7_act3_testbench();
 		
 		Undo = 1;				//De vuelta al estado Entering OpCode
 		DisplayFormat = 0;			//Se debe ver 00000001 en los displays (DataIn)
-
-		
+	end
+endmodule
 
 
 
