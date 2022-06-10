@@ -105,10 +105,10 @@ module S7_actividad2 #(parameter N_DEBOUNCER = 10)(
     mux_2_1_16b #(
     .N               (16)
     ) DisplaySelector (
-    .DataIn          (DataIn),
-    .Result          (Result),
-    .ToDisplaySel    (ToDisplaySel),
-    .ToDisplay       (ToDisplay)
+    .A         (DataIn),
+    .B         (Result),
+    .sel       (ToDisplaySel),
+    .out       (ToDisplay)
 );
 
 
@@ -116,7 +116,7 @@ endmodule
 
 
 
-
+/*
 // Modulos auxiliares:
 
 module mux_2_1_16b #(parameter N = 16)(
@@ -136,5 +136,25 @@ module mux_2_1_16b #(parameter N = 16)(
     end
 
 endmodule
+
+module mux_2_1_16b #(parameter N = 16)(
+    input  logic [N-1:0] A,
+    input  logic [N-1:0] B,
+    input  logic         sel,
+
+    output logic [N-1:0] out  // valor de salida para el Display
+    );
+
+    always_comb begin
+        if (sel)
+            out = B;
+        else
+            out = A;
+        
+    end
+
+endmodule
+
+*/
     
 

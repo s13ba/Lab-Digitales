@@ -56,7 +56,8 @@ module Interfaz_Display#(parameter N = 16, width_sel = 3, Max_bits = 32)(
 		.bcd(dec_num)
 	);
 	
-    mux_2_1_16b #(.N(Max_bits))(
+    mux_2_1_16b #(.N(Max_bits))
+    Format_ctrl(
         .A(hex_num),
         .B(dec_num),
         .out(To_BCD),

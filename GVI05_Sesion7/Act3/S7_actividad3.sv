@@ -34,6 +34,40 @@ module S7_actividad3 #(parameter N_DEBOUNCER = 10)(
     output logic [ 2:0] Status
     );
     
+    // Calculadora con Undo de la actividad anterior
+    // Ojo! Usa el resetN
+    logic [15:0] ToDisplay;
+
+    S7_actividad2 #(
+    .N_DEBOUNCER    (N_DEBOUNCER)
+    ) u_S7_actividad2 (
+    .clk            (clk),
+    .resetN         (resetN),
+    .Enter          (Enter),
+    .Undo           (Undo),
+    .DataIn         (DataIn),
+    .ToDisplay      (ToDisplay),
+    .Flags          (Flags),
+    .Status         (Status)
+    );
+
+    logic  reset;
+    assign reset=~resetN;
+    // Controlador del display
+
+    Interfaz_Display #(
+    .N                   (16),
+    .width_sel           (3),
+    .Max_bits            (32)
+    ) u_Interfaz_Display (
+    .clk                 (clk),
+    .reset               (reset),
+    .ToDisplay           (ToDisplay),
+    .DisplayFormat       (DisplayFormat),
+    .Segments            (Segments),
+    .Anodes              (Anodes)
+);
+
 
     
 endmodule

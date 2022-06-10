@@ -29,23 +29,20 @@ module S7_act3_testbench();
 	logic [3:0] Flags;
 	logic [2:0] Status;					//Se declaran las señales de entrada al módulo
 
-	S7_Actividad_3 #(
-	.N_DEBOUNCER (10)
-	) DUT (
-		
-		.clk(clk),
-		.resetN(resetN),
-		.Enter(Enter),
-		.Undo(Undo),
-		.DisplayFormat(DisplayFormat),
-		.DataIn(DataIn),
-		.Segments(Segments),
-		.Anodes(Anodes),
-		.Flags(Flags),
-		.Status(Status)				//Se conectan todas las señales con las entradas correspondientes
-
-	);
-	
+	S7_actividad3 #(
+    .N_DEBOUNCER      (10)
+) DUT (
+    .clk              (clk),
+    .resetN           (resetN),
+    .Enter            (Enter),
+    .Undo             (Undo),
+    .DisplayFormat    (DisplayFormat),
+    .DataIn           (DataIn),
+    .Segments         (Segments),
+    .Anodes           (Anodes),
+    .Flags            (Flags),
+    .Status           (Status)
+);
 
 	//Se busca comprobar el funcionamiento de la última sección del módulo, puesto que todo el resto se comprobó que funcionaba.
 	//
@@ -74,7 +71,7 @@ module S7_act3_testbench();
 
 		DisplayFormat = 1;			//Se debe ver 00065535 en los displays
 
-	#200						//Hay que darle tiempo al módulo para que haga la conversión
+	#300						//Hay que darle tiempo al módulo para que haga la conversión
 
 		Enter = 1;				//Se guarda DataIn en el registro A
 		DisplayFormat = 0;			//Se debe ver 0000FFFF en los displays
@@ -88,7 +85,7 @@ module S7_act3_testbench();
 
 		DisplayFormat = 1;			//Se debe ver 00000090 en los displays
 
-	#200
+	#300
 
 		Enter = 1;				//Se guarda DataIn en el registro b
 		DisplayFormat = 0;			//Se debe ver 000005A en los displays
@@ -102,7 +99,7 @@ module S7_act3_testbench();
 
 		DisplayFormat = 1;			//Se debe ver 00000001 en los displays
 
-	#200
+	#300
 
 		Enter = 1;				//Se guarda DataIn en el registro OpCode
 		DisplayFormat = 0;			//Se debe ver 00000001 en los displays
@@ -115,7 +112,7 @@ module S7_act3_testbench();
 
 		DisplayFormat = 1;			//Se debe ver 65445 en los displays
 
-	#200
+	#300
 		
 		Undo = 1;				//De vuelta al estado Entering OpCode
 		DisplayFormat = 0;			//Se debe ver 00000001 en los displays (DataIn)
