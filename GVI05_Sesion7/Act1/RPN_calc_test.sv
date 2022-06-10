@@ -185,6 +185,39 @@ module RPN_calc_test();
 
         resetN = 1;
 
+        // Spam de Enters
+
+        // Carga de datos en A:
+
+        DataIn  = 16'hFFFF;
+        Enter   = 1;
+        #48 Enter = 0;
+        #10
+
+        // Carga de datos en B:
+
+        DataIn  = 16'h0101;
+        Enter   = 1;
+        #48 Enter = 0;
+        #15
+
+        // Carga de datos en Op y mostrar resultados:
+
+        DataIn  = 16'h0000;
+        Enter   = 1;
+        #48 Enter = 0;
+        #15
+
+        //Volver al estado inicial:
+        Enter   = 1;
+        #50 Enter = 0;
+        #15
+
+        // Calcular con las 4 operaciones:
+        // Repite lo anterior pero para todas las operaciones
+
+
+
     end
 
 endmodule
