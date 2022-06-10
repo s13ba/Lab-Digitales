@@ -23,6 +23,8 @@
 
 module RPN_calc_test();
 
+//Simular hasta 1,100 ns
+
     // Inputs:
     logic        clk;
     logic        resetN;
