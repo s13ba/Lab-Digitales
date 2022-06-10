@@ -38,7 +38,7 @@ module bubblebobbletest();
     
     initial begin
     //clock en 0
-    // in = 00000000000000001111111111111111
+    // in = abcd
         clk = 0;
         in = 32'habcd;
     
@@ -57,22 +57,24 @@ module bubblebobbletest();
         #10
         reset = 0;
     
-    //se cambia in a 11111111111111111111111111111111
+    //se cambia in a aabb
         #10
         trigger = 0;
         #500
         in = 32'haabb;
     
-    // se cambia a 0
+    // se cambia a ffff
         #200
         trigger = 1;
         in = 32'hffff;
-        
+      // se cambia a 0  
         #640
         in = 32'h0;
+     // se cambia a ffffffff
         #640
         in= 32'hffffffff;
         #640
+     // se cambia a 0
         in = 32'h0;
         
     
