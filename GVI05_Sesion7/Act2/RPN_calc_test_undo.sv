@@ -29,6 +29,7 @@ module RPN_calc_test_undo();
     logic        clk;
     logic        resetN;
     logic        Enter;
+    logic        Undo;
     logic [15:0] DataIn;
 
     // Outputs:
@@ -38,12 +39,25 @@ module RPN_calc_test_undo();
     logic [ 2:0] Status;      // Indica de manera secuencial el estado en el que se encuentra
 
     // El modulo a probar:
-    S7_actividad1 #(
+//     S7_actividad1 #(
+//     .N_DEBOUNCER    (10)
+//     ) DUT (
+//     .clk            (clk),
+//     .resetN         (resetN),
+//     .Enter          (Enter),
+//     .DataIn         (DataIn),
+//     .ToDisplay      (ToDisplay),
+//     .Flags          (Flags),
+//     .Status         (Status)
+// );
+
+    S7_actividad2 #(
     .N_DEBOUNCER    (10)
-    ) DUT (
+    ) DUT2 (
     .clk            (clk),
     .resetN         (resetN),
     .Enter          (Enter),
+    .Undo           (Undo),
     .DataIn         (DataIn),
     .ToDisplay      (ToDisplay),
     .Flags          (Flags),
@@ -56,7 +70,7 @@ module RPN_calc_test_undo();
     initial begin
 
         // Inicializar:
-
+        Undo    =   0;
         clk     =   0;
         resetN  =   0;
         Enter   =   0; //Lectura de boton: 1 pulso despues de 48 ns mantenido
@@ -82,27 +96,40 @@ module RPN_calc_test_undo();
         Enter   = 1;
         #48 Enter = 0;
         #15
+        
+        // Undo desde Op hasta B
+        Undo     = 1;
+        #48 Undo = 0;
+        #10
 
-        //Volver al estado inicial:
-        Enter   = 1;
-        #50 Enter = 0;
-        #15
+        // Undo desde B hasta A
+        Undo     = 1;
+        #48 Undo = 0;
+        #10
 
-        // Calcular con las 4 operaciones:
-        // Repite lo anterior pero para todas las operaciones
+        // Spam de Undo para asegurarse que se queda en A:
+        Undo     = 1;
+        #48 Undo = 0;
+        #10
+        Undo     = 1;
+        #48 Undo = 0;
+        #10
+        Undo     = 1;
+        #48 Undo = 0;
+        #10
 
+        // Calculo con datos distintos para confirmar que Undo deshace y memoria se sobreescribe
 
-    // Resta:
         // Carga de datos en A:
 
-        DataIn  = 16'hFFFF;
+        DataIn  = 16'hFEFE;
         Enter   = 1;
-        #50 Enter = 0;
-        #15
+        #48 Enter = 0;
+        #10
 
         // Carga de datos en B:
 
-        DataIn  = 16'h0101;
+        DataIn  = 16'h4206;
         Enter   = 1;
         #48 Enter = 0;
         #15
@@ -113,67 +140,7 @@ module RPN_calc_test_undo();
         Enter   = 1;
         #48 Enter = 0;
         #15
-
-        //Volver al estado inicial:
-        Enter   = 1;
-        #50 Enter = 0;
-        #15
-
-    // OR:
-
-        // Carga de datos en A:
-
-        DataIn  = 16'hFFFF;
-        Enter   = 1;
-        #48 Enter = 0;
-        #15
-
-        // Carga de datos en B:
-
-        DataIn  = 16'h0101;
-        Enter   = 1;
-        #48 Enter = 0;
-        #15
-
-        // Carga de datos en Op y mostrar resultados:
-
-        DataIn  = 16'h0002;
-        Enter   = 1;
-        #48 Enter = 0;
-        #15
-
-        //Volver al estado inicial:
-        Enter   = 1;
-        #50 Enter = 0;
-        #15
-
-    // AND:
-
-        // Carga de datos en A:
-
-        DataIn  = 16'hFFFF;
-        Enter   = 1;
-        #48 Enter = 0;
-        #15
-
-        // Carga de datos en B:
-
-        DataIn  = 16'h0003;
-        Enter   = 1;
-        #48 Enter = 0;
-        #15
-
-        // Carga de datos en Op y mostrar resultados:
-
-        DataIn  = 16'h0000;
-        Enter   = 1;
-        #48 Enter = 0;
-        #15
-
-        //Volver al estado inicial:
-        Enter   = 1;
-        #50 Enter = 0;
-        #15
+        
 
         // Reset:
 
