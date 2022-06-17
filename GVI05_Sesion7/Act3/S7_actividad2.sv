@@ -72,7 +72,7 @@ module S7_actividad2 #(parameter N_DEBOUNCER = 10)(
 
     ReversePolishFSM_Undo Reverse_Polish_FSM_Undo (
         .clk             (clk),
-        .Reset           (Reset),
+        .Reset           (reset),
         .Enter_pulse     (Enter_deb),
         .deb_undo        (deb_undo),
         .Status          (Status),

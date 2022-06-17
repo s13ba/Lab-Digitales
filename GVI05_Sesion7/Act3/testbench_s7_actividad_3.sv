@@ -118,32 +118,35 @@ module S7_act3_testbench();
 		DisplayFormat = 0;			//Se debe ver 00000001 en los displays (DataIn)
 
         // Carga de datos en A:
-
+		#5 Undo = 0;
+		#5 resetN = 0;
+		#5 resetN = 1;
+		DisplayFormat = 1;
         DataIn  = 16'hFFFF;
         Enter   = 1;
-        #50 Enter = 0;
+        #200 Enter = 0;
         #15
 
         // Carga de datos en B:
 
         DataIn  = 16'h0101;
         Enter   = 1;
-        #48 Enter = 0;
+        #200 Enter = 0;
         #15
 
         // Carga de datos en Op y mostrar resultados:
 
         DataIn  = 16'h0001;
         Enter   = 1;
-        #48 Enter = 0;
-        #15
+        #200 Enter = 0;
+    /*    #15
 
         //Volver al estado inicial:
         Enter   = 1;
         #50 Enter = 0;
-        #15
 
-	
+
+	*/
 
 	end
 endmodule
