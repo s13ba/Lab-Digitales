@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps/*
+`timescale 1ns / 1ps
 //Pregunta 5.2
 
 
@@ -26,4 +26,4 @@ module clock_divider
         clk_out <= clk_out;
     end
     end
-endmodule*/
+endmodule
