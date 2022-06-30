@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module anti_rebote_i#(parameter DELAY1 = 100, DELAY2 = 5, DELAY3 = 1, count_8 = 8, COUNTER_MAX = 10)(
+module anti_rebote_i#(parameter DELAY1 = 100000000, DELAY2 = 5000000, DELAY3 = 100000, count_8 = 8, COUNTER_MAX = 200000)(
     input logic clock,
     input logic reset,
     input logic reset2,
