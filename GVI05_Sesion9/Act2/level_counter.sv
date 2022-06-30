@@ -1,8 +1,9 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ps 
+// Testbench del contador de nivel
 
-module level_counter # (parameter count_bits=8)(
-    input   logic                       lv_in, CLK100MHZ, reset,
-    output  logic   [count_bits-1:0]    hold_count
+module level_counter# (parameter count_max=8)(
+    input   logic                       lv_in, CLK100MHZ, reset, slowReset,
+    output  logic   [count_max-1:0]     hold_count
 );
 
     ////// Conversor de 100MHz a 2Hz //////
@@ -19,7 +20,7 @@ module level_counter # (parameter count_bits=8)(
         
             clk_counter <= 'd0;
             CLK2HZ <= 0;
-        end else if (clk_counter == 36'hba43b7400-1) begin
+        end else if (clk_counter == 36'h1f18a1f-1) begin
 
             clk_counter <= 'd0;
             CLK2HZ <= ~CLK2HZ; //invierte en vez de subir y bajar cada cierta cantidad de cantos de subida
@@ -31,20 +32,13 @@ module level_counter # (parameter count_bits=8)(
         end
 
     ////// Counter //////
-
-    always_ff @(posedge CLK2HZ) begin
-
-        if (reset) // reset lleva contador a cero
-            hold_count <= 'd0; //contador se reinicia
-        else 
-            if (lv_in)
-                hold_count <= hold_count+1; //sino, va sumando en cada canto positivo
-            else
-                hold_count <= hold_count;
-                
-    end
-        
     
-
+    nbit_counter#(.N(count_max)) counter_n_bit( //contador que coordina al mux y al decodificador 
+         .clk(CLK2HZ),
+         .reset(slowReset),
+         .PB_in(lv_in),
+         .count(hold_count)
+         ); 
+        
 
 endmodule

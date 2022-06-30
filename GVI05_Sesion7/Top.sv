@@ -4,7 +4,7 @@
 module calc_top(
     input   logic  [15:0]  SW,
     input   logic          CLK100MHZ, 
-    input   logic          CPU_RESETN, BTNR, BTNL, BTND // Reset, Undo, Enter, DisplayFormat
+    input   logic          CPU_RESETN, BTNR, BTNL, BTND, // Reset, Undo, Enter, DisplayFormat
     output  logic          CA, CB, CC, CD, CE, CF, CG,  // Segmentos 
     output  logic  [ 7:0]  AN,                          // Anodos
     output  logic  [15:0]  LED
