@@ -27,19 +27,19 @@ module S9_actividad1(
     output logic [7:0] AN
     );
     
-    logic [6:0] segments;
-    assign segments = {CA, CB, CC, CD, CE, CF, CG};
+    //logic [6:0] segments;
+    //assign segments = {CA, CB, CC, CD, CE, CF, CG};
     
-    logic [7:0] anodos;
-    assign anodos = AN;
+    //logic [7:0] anodos;
+    //assign anodos = AN;
     
     anti_rebote_i anti_rebote_i(
         .clock(CLK100MHZ),
         .reset(BTNU),
         .reset2(BTNU),
         .BTNC(BTNC),
-        .segments(segments),   
-        .anodos(anodos)
+        .segments({CA, CB, CC, CD, CE, CF, CG}),   
+        .anodos(AN)
     );
     
     
