@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Contador_1_debouncer#(parameter PB_DELAY = 5_000_000, count_8 = 8, COUNTER_MAX = 200_000)(
+module Contador_1_debouncer#(parameter PB_DELAY = 5_000_000, count_8 = 8, DISPLAY_COUNTER = 100_000)(
     input logic clock,
     input logic reset,
     input logic reset2,
@@ -76,7 +76,7 @@ module Contador_1_debouncer#(parameter PB_DELAY = 5_000_000, count_8 = 8, COUNTE
         .anodos(anodos)  
         );
         
-    clock_divider#(.COUNTER_MAX(COUNTER_MAX)) clock_divider(
+    clock_divider#(.COUNTER_MAX(DISPLAY_COUNTER)) clock_divider(
         .clk_in(clock),
         .reset(reset),
         .clk_out(clk_250)
