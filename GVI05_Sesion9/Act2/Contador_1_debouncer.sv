@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Contador_1_debouncer#(parameter PB_DELAY = 5_000_000, count_8 = 8, DISPLAY_COUNTER = 100_000)(
+module Contador_1_debouncer#(parameter PB_DELAY = 5_000_000, count_8 = 8, DISPLAY_COUNTER = 100000)(
     input logic clock,
     input logic reset,
     input logic reset2,
@@ -49,12 +49,15 @@ module Contador_1_debouncer#(parameter PB_DELAY = 5_000_000, count_8 = 8, DISPLA
          .PB_in (PB_pressed_pulse),
          .count (press_count)
          );
-         
+        
+    logic GND;
+    assign GND = 0;
+
     level_counter# (.count_max(count_8)) Level_counter(
         .lv_in      (PB_pressed_status), 
         .CLK100MHZ  (clock), 
         .reset      (reset), 
-        .slowReset  (reset2),
+        .slowReset  (GND),
         .hold_count (hold_count)
     );
          
@@ -75,7 +78,7 @@ module Contador_1_debouncer#(parameter PB_DELAY = 5_000_000, count_8 = 8, DISPLA
         .segments(segments),
         .anodos(anodos)  
         );
-        
+
     clock_divider#(.COUNTER_MAX(DISPLAY_COUNTER)) clock_divider(
         .clk_in(clock),
         .reset(reset),
