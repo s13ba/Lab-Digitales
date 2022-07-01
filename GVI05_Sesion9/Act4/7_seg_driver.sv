@@ -39,6 +39,8 @@ module driver_7_seg#(parameter N = 16, count_max = 2)(
     else 
         assign data = {'d0,BCD_in};
     
+    logic clock_div ;
+    
     
     //***Primera parte: Separar digitos del numero, convertir 1 digito a 7seg por la vez***
     
@@ -86,7 +88,7 @@ module driver_7_seg#(parameter N = 16, count_max = 2)(
     //***Segunda parte: mostrar un numero unico y escoger su display***
     
     nbit_counter#(.N(count_max)) counter_n_bit( //contador que coordina al mux y al decodificador 
-         .clk(clock),
+         .clk(clock_div),
          .reset(reset),
          .count(sel)
          ); 
@@ -95,6 +97,12 @@ module driver_7_seg#(parameter N = 16, count_max = 2)(
         .sel(sel),
         .out(anodos)
         );
+        
+    clock_divider clock_divider(
+    .clk_in(clock),
+    .reset(reset),
+    .clk_out(clock_div)
+    );
 
     // Limitar numero de displays a encenderse
 
