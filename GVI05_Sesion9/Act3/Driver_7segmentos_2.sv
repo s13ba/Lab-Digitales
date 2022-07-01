@@ -258,7 +258,7 @@ endmodule
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module anode_ctrl#(parameter N = 3)(
+module anode_ctrl#(parameter N = 2)(
     input  logic [N-1:0]sel,
     output logic [7:0]out
     );
@@ -268,12 +268,10 @@ module anode_ctrl#(parameter N = 3)(
         case (sel)
             'd0: out = 8'b11111110;
             'd1: out = 8'b11111101;
-            'd2: out = 8'b11111111;
-            'd3: out = 8'b11111111;
-            'd4: out = 8'b10111111;
-            'd5: out = 8'b01111111;
-            'd6: out = 8'b11111111;
-            'd7: out = 8'b11111111;
+
+            'd2: out = 8'b10111111;
+            'd3: out = 8'b01111111;
+
         endcase
 
     end
