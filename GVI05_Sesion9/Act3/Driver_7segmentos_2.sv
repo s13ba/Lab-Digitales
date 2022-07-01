@@ -26,8 +26,8 @@ module driver_7segmentos_2#(parameter N = 16, count_max = 2)(
     input  logic            reset,
     input  logic [N-1:0]    BCD_in,     // informacion a mostrar
     output logic [  6:0]    segments,   // {CA, CB, CC, CD, CE, CF, CG}
-    output logic [  7:0]    anodes_1      // {AN7, AN6, AN5, AN4, AN3, AN2, AN1, AN0}
-    output logic [N-1:0]    LED;
+    output logic [  7:0]    anodes_1,      // {AN7, AN6, AN5, AN4, AN3, AN2, AN1, AN0}
+    output logic [N-1:0]    LED
     );
 
     // Hacer LEDs correspondientes brillar
