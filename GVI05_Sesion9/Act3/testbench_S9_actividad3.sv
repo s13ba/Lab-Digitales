@@ -1,29 +1,12 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 29.06.2022 01:33:30
-// Design Name: 
-// Module Name: testbench_S9_actividad3
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
+// Testbench para la ALU combinacional de la pregunta 3 de la guia 9.
+// Apreta 1 boton a la vez para ver que operacion hace y como la muestra
+// Pulsar 2 botones o mas lo lleva de vuelta a su estado default
 
 module testbench_S9_actividad3();
     //// Inputs ////
     logic        CLK100MHZ;
-    logic        reset;
+    logic        CPU_RESETN;
     logic        BTNU, BTND, BTNR, BTNL;
     logic [15:0] SW; // {B,A}
 

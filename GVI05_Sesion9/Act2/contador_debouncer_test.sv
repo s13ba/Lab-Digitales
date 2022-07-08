@@ -28,7 +28,7 @@ module contador_debouncer_test();
     logic [6:0]segments;   // {CA, CB, CC, CD, CE, CF, CG}
     logic [7:0]anodos;      // {AN7, AN6, AN5, AN4, AN3, AN2, AN1, AN0}
    
-    Contador_1_debouncer#(.PB_DELAY(5), .DISPLAY_COUNTER(200), .clk_counter_max(250)) 
+    Contador_1_debouncer_sim#(.PB_DELAY(5), .DISPLAY_COUNTER(200), .clk_counter_max(250)) 
         DUT(
             .clock   (clock),
             .reset   (reset),
