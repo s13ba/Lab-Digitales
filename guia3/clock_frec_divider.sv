@@ -1,16 +1,16 @@
 `timescale 1ns / 1ps
 //Pregunta 5.2
-//ModificaciÛn del clock_divider, ahora con m·s tula! (y en base a frecuencias)
+//Modificaci√≥n del clock_divider, ahora con m√°s tula! (y en base a frecuencias)
 
 module Clock_divider_mod
-#(parameter FREC_OUT = 30,
-            FREC_IN = 100)  //frecuencias en MHz
+#(parameter FREC_OUT = 30.0,
+            FREC_IN = 100.0)  //frecuencias en MHz
 
 ( input logic clk_in,
   input logic reset,
   output logic clk_out );
     
-  localparam COUNTER_MAX = FREC_IN / (2*FREC_OUT);
+  localparam COUNTER_MAX = $ceil(FREC_IN / (2*FREC_OUT));
   localparam DELAY_WIDTH = $clog2(COUNTER_MAX); //clog define el nro de bits necesarios pa representar el contador
   logic [DELAY_WIDTH-1:0] counter = 'd0; //le epic contador
 
