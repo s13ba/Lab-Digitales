@@ -37,7 +37,7 @@ module ME_top
     output  logic   [7:0]      ss_select
 );
 	/*
-	 * Convertir la señal del botón reset_n a 'active HIGH'
+	 * Convertir la seï¿½al del botï¿½n reset_n a 'active HIGH'
 	 * y sincronizar con el reloj.
 	 */
 	logic [7:0]    tx_data; 
@@ -87,7 +87,7 @@ UART_tx_control_wrapper
     );
 
 
-	/* Módulo UART a 115200/8 bits datos/No paridad/1 bit stop */
+	/* Mï¿½dulo UART a 115200/8 bits datos/No paridad/1 bit stop */
 	uart_basic #(
 		.CLK_FREQUENCY(100000000), // reloj base de entrada
 		.BAUD_RATE(115200)
@@ -97,10 +97,10 @@ UART_tx_control_wrapper
 		.rx           (uart_rx),
 		.rx_data      (rx_data),
 		.rx_ready     (rx_ready),
-		.tx           (uart_tx),
+		.tx           (uart_tx), // medible
 		.tx_start     (tx_start),
 		.tx_data      (tx_data),
-		.tx_busy      (tx_busy)
+		.tx_busy      (tx_busy) //medible
 	);
 
 // Logica de control para recibir los bytes desde la UART
