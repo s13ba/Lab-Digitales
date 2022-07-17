@@ -25,8 +25,9 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
 )(
     input logic clk, reset, rx_ready,
     input logic [7:0]rx_data,
-    output logic Trigger_TX_result, Enter_ALU,
-    output logic [15:0] Data_In
+    output logic trigger, Enter_ALU,
+    output logic [15:0] Data_In,
+    output logic [15:0]LED
 
     );
     
@@ -38,13 +39,16 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
     logic [31:0]  hold_state_timer;
     
     
-    enum logic [15:0] {Wait_OP1_LSB, Store_OP1_LSB, Wait_OP1_MSB, Store_OP1_MSB, Wait_OP2_LSB, Store_OP2_LSB, Wait_OP2_MSB, Store_OP2_MSB, Wait_CMD, Store_CMD, Delay_1_cycle, Trigger_TX_result} state, next_state;
+    
+    enum logic [3:0] {Wait_OP1_LSB, Store_OP1_LSB, Wait_OP1_MSB, Store_OP1_MSB, Wait_OP2_LSB, Store_OP2_LSB, Wait_OP2_MSB, Store_OP2_MSB, Wait_CMD, Store_CMD, Delay_1_cycle, Trigger_TX_result} state, next_state;
     always_ff @(posedge clk) begin
         if(reset)
             state <= Wait_OP1_LSB;
         else
             state <= next_state;
     end
+    
+    assign LED[15:12] = state;
     
     always_comb begin
         next_state = state;
@@ -53,7 +57,7 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
         save3 = 0;
         save4 = 0;
         save5 = 0;
-        Trigger_TX_result = 0;
+        trigger = 0;
         Op_selector = 2'b00;
         Enter_ALU = 0;
         OP1_LSB = 0;
@@ -146,7 +150,7 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
 
             Trigger_TX_result: begin
                                next_state = Wait_OP1_LSB;
-                               Trigger_TX_result = 1;
+                               trigger = 1;
                                Op_selector = 2'b10;
             end
              
