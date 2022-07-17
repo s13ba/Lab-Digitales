@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj de espera entre el envio de 2 bytes consecutivos
+module UART_RX_CTRL#(	parameter CALC_DELAY = 1000,   // ciclos de reloj de espera para mostrar el calculo correspondiente
 	parameter WAIT_FOR_REGISTER_DELAY = 100 // tiempo de espera para iniciar la transmision luego de registrar el dato a enviar
 )(
     input logic clk, reset, rx_ready,
@@ -68,7 +68,7 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
         
         case(state)
             Wait_OP1_LSB: begin
-                          Op_selector = 2'b00;
+                        //   Op_selector = 2'b00;
                           if(rx_ready)
                             next_state = Store_OP1_LSB;
             end
@@ -77,12 +77,12 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
                            OP1_LSB = rx_data;
                            save1 = 1;
                            Op_selector = 2'b00;   
-                            if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
+                            // if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
 				                        next_state = Wait_OP1_MSB;            
             end
             
             Wait_OP1_MSB: begin
-                          Op_selector = 2'b00;
+                        //   Op_selector = 2'b00;
                           if(rx_ready)
                             next_state = Store_OP1_MSB;                
             end
@@ -91,12 +91,12 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
                            OP1_MSB = rx_data;
                            save2 = 1;
                            Op_selector = 2'b00;
-                           if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
+                        //    if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
 				                        next_state = Wait_OP2_LSB;               
             end
             
             Wait_OP2_LSB: begin
-                          Op_selector = 2'b01;
+                        //   Op_selector = 2'b00;
                           Enter_ALU = 1;
                           if(rx_ready)
                             next_state = Store_OP2_LSB;                
@@ -106,12 +106,12 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
                            OP2_LSB = rx_data;
                            save3 = 1;
                            Op_selector = 2'b01;
-                           if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
+                        //    if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
 				               next_state = Wait_OP2_MSB;
             end
             
             Wait_OP2_MSB: begin
-                          Op_selector = 2'b01;
+                          //Op_selector = 2'b01;
                           if(rx_ready)
                             next_state = Store_OP2_MSB;                 
             end
@@ -121,7 +121,7 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
                            OP2_MSB = rx_data;
                            save4 = 1;
                            Op_selector = 2'b01;
-                           if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
+                        //    if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
 				               next_state = Wait_CMD;                        
             end
 
@@ -137,15 +137,17 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
                        CTRL = rx_data;
                        save5 = 1;
                        Op_selector = 2'b10;
-                       if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
-				               next_state = Delay_1_cycle;
+                    //    if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
+				            next_state = Delay_1_cycle;
+                            Enter_ALU = 1;
                        
             end
             
             Delay_1_cycle: begin
                            next_state = Trigger_TX_result;
                            Op_selector = 2'b10;
-                           Enter_ALU = 1;
+                        // if(hold_state_timer >= CALC_DELAY)
+                                next_state = Trigger_TX_result;
             end
 
             Trigger_TX_result: begin
@@ -215,7 +217,7 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
     
     
     always_ff @(posedge clk) begin
-    	if(state == Store_OP1_LSB || state == Store_OP1_MSB || state == Store_OP2_LSB || state == Store_OP2_MSB || state == Store_CMD) begin
+    	if(state == Store_OP1_LSB || state == Store_OP1_MSB || state == Store_OP2_LSB || state == Store_OP2_MSB || state == Store_CMD || state == Delay_1_cycle) begin
     		hold_state_timer <= hold_state_timer + 1;
     	end else begin
     		hold_state_timer <= 0;

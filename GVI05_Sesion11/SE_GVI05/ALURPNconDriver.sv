@@ -165,7 +165,7 @@ module S7_actividad2 #(parameter N_DEBOUNCER = 5000000)(
     // ALU: Recibe un numero de 16 bits, load A, B, OpCode y updateRes (ademas de clk y resetN)
     //      Retorna 4 bits de Flags y un resultado de 16 bits
     logic [15:0] Result;
-    assign resultado = Result;
+    // assign resultado = Result;
     ALU_reg_mod #   (
         .N          (16)
 )   ALU             (
@@ -1191,7 +1191,7 @@ module ReversePolishFSM_Undo(
                 LoadOpA = 1'b1;
                 LoadOpB = 1'b0;
                 LoadOpCode = 1'b0;
-                ToDisplaySel = 1'b0;
+                ToDisplaySel = 1'b1;
                 updateRes = 1'b0; 
                 next_state = S2;
             end

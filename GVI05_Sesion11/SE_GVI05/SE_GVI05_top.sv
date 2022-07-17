@@ -58,7 +58,7 @@ module SE_GVI05_top
 	logic [7:0] tx_data;
 
 	uart_basic #(
-		.CLK_FREQUENCY(100000000), // reloj base de entrada
+		.CLK_FREQUENCY(100_000_000), // reloj base de entrada
 		.BAUD_RATE(115200)
 	) uart_basic_inst (
 		.clk          (CLK100MHZ),
@@ -80,7 +80,7 @@ module SE_GVI05_top
 	logic	[ 3:0]	RX_CTRL_status;
 
 	UART_RX_CTRL #(	
-		.INTER_BYTE_DELAY(1000000),   // ciclos de reloj de espera entre el envio de 2 bytes consecutivos
+		.CALC_DELAY(1000),   // ciclos de reloj de espera entre el envio de 2 bytes consecutivos
 		.WAIT_FOR_REGISTER_DELAY(100) // tiempo de espera para iniciar la transmision luego de registrar el dato a enviar
 	) UART_RX_CTRL_inst (
 		.clk		(CLK100MHZ), 
@@ -135,6 +135,6 @@ module SE_GVI05_top
     );
 
 // LEDs: 4 MS para los estados del RX_CTRL y 4 LS para las flags de la ALU
-	assign LED = {RX_CTRL_status,8'h00,ALU_Flags};
+	assign LED = {RX_CTRL_status,rx_ready,7'd0,ALU_Flags};
 
 endmodule
