@@ -25,7 +25,7 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
 )(
     input logic clk, reset, rx_ready,
     input logic [7:0]rx_data,
-    output logic trigger, Enter_ALU,
+    output logic Trigger_TX_result, Enter_ALU,
     output logic [15:0] Data_In
 
     );
@@ -53,7 +53,7 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
         save3 = 0;
         save4 = 0;
         save5 = 0;
-        trigger = 0;
+        Trigger_TX_result = 0;
         Op_selector = 2'b00;
         Enter_ALU = 0;
         OP1_LSB = 0;
@@ -146,7 +146,7 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
 
             Trigger_TX_result: begin
                                next_state = Wait_OP1_LSB;
-                               trigger = 1;
+                               Trigger_TX_result = 1;
                                Op_selector = 2'b10;
             end
              
