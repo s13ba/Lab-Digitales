@@ -31,7 +31,8 @@ module ALURPNconDriver #(parameter N_DEBOUNCER = 5000000)(
     output logic [ 6:0] Segments,       // solo segmentos, no considere el punto
     output logic [ 7:0] Anodes,
     output logic [ 3:0] Flags,
-    output logic [ 2:0] Status
+    output logic [ 2:0] Status,
+    output logic [15:0] resultado
     );
     
     // Calculadora con Undo de la actividad anterior
@@ -48,7 +49,8 @@ module ALURPNconDriver #(parameter N_DEBOUNCER = 5000000)(
     .DataIn         (DataIn),
     .ToDisplay      (ToDisplay),
     .Flags          (Flags),
-    .Status         (Status)
+    .Status         (Status),
+    .resultado      (resultado)
     );
 
     logic  reset;
@@ -104,7 +106,8 @@ module S7_actividad2 #(parameter N_DEBOUNCER = 5000000)(
     input  logic [15:0] DataIn,
     output logic [15:0] ToDisplay,  // valor de salida para el Display
     output logic [ 3:0] Flags,      // {N,Z,C,V}
-    output logic [ 2:0] Status      // Indica de manera secuencial el estado en el que se encuentra
+    output logic [ 2:0] Status,      // Indica de manera secuencial el estado en el que se encuentra
+    output logic [15:0] resultado      // Resultado de 16 bits en HEX
     );
     
     logic reset;
@@ -162,6 +165,7 @@ module S7_actividad2 #(parameter N_DEBOUNCER = 5000000)(
     // ALU: Recibe un numero de 16 bits, load A, B, OpCode y updateRes (ademas de clk y resetN)
     //      Retorna 4 bits de Flags y un resultado de 16 bits
     logic [15:0] Result;
+    assign resultado = Result;
     ALU_reg_mod #   (
         .N          (16)
 )   ALU             (

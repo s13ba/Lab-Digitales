@@ -32,7 +32,7 @@ module S9_actividad4(
     
     assign LED[12:4] = 'b0;
     
-    S7_actividad3 S7_actividad3(
+    ALURPNconDriver S7_actividad3(
         .clk(CLK100MHZ),
         .resetN(CPU_RESETN),
         .Enter(BTNC),
