@@ -30,7 +30,7 @@ module UART_TX_CTRL
 	input  logic           Trigger_TX_result, // Gatillo de transmision del resultado hacia el ME
 	input  logic [15:0]    resultado,       // Dato que se desea transmitir de 16 bits
 	output logic [7:0]     tx_data,        // Datos entregados al driver UART para transmision
-	output logic           tx_start,       // Pulso para iniciar transmision por la UART
+	output logic           tx_start       // Pulso para iniciar transmision por la UART
     );
     
     logic [15:0]  tx_data16;
