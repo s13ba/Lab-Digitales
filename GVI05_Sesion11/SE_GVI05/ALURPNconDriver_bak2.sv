@@ -21,7 +21,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module ALURPNconDriver #(parameter N_DEBOUNCER = 1)(
+module ALURPNconDriver #(parameter N_DEBOUNCER = 0)(
     input  logic        clk,
     input  logic        resetN,         // Ojo! Reset negado
     input  logic        Enter,
@@ -117,18 +117,18 @@ module S7_actividad2 #(parameter N_DEBOUNCER = 5000000)(
 
     // Debouncer: Recibe Enter y retorna un pulso unico en Enter_deb
 
-//     logic Enter_deb;
+    logic Enter_deb;
 
-//     PB_Debouncer_FSM #     (
-//     .DELAY                 (N_DEBOUNCER)
-//     ) Enter_Debouncer            (
-//         .clk                  (clk),
-// 	    .rst                  (reset), 
-// 	    .PB                   (Enter),
-// 	    .PB_pressed_status    (),
-// 	    .PB_pressed_pulse     (Enter_deb), // solo nos interesa el pulso
-//         .PB_released_pulse    ()
-// );
+    PB_Debouncer_FSM #     (
+    .DELAY                 (N_DEBOUNCER)
+    ) Enter_Debouncer            (
+        .clk                  (clk),
+	    .rst                  (reset), 
+	    .PB                   (Enter),
+	    .PB_pressed_status    (),
+	    .PB_pressed_pulse     (Enter_deb), // solo nos interesa el pulso
+        .PB_released_pulse    ()
+);
 
     // Debouncer: Lo mismo pero para Undo
 
@@ -152,8 +152,7 @@ module S7_actividad2 #(parameter N_DEBOUNCER = 5000000)(
     ReversePolishFSM_Undo Reverse_Polish_FSM_Undo (
         .clk             (clk),
         .Reset           (reset),
-        // .Enter_pulse     (Enter_deb),
-        .Enter_pulse     (Enter),
+        .Enter_pulse     (Enter_deb),
         .deb_undo        (deb_undo),
         .Status          (Status),
         .LoadOpA         (LoadOpA),
@@ -1281,21 +1280,3 @@ module ReversePolishFSM_Undo(
     end
     
 endmodule
-
-// El level to pulse q nos puede salvar la vida ojala
-
-module pos_edge_det ( input sig,            // Input signal for which positive edge has to be detected
-                      input clk,            // Input signal for clock
-                      output pe);           // Output signal that gives a pulse when a positive edge occurs
-
-    reg   sig_dly;                          // Internal signal to store the delayed version of signal
-
-    // This always block ensures that sig_dly is exactly 1 clock behind sig
-	always @ (posedge clk) begin
-		sig_dly <= sig;
-	end
-
-    // Combinational logic where sig is AND with delayed, inverted version of sig
-    // Assign statement assigns the evaluated expression in the RHS to the internal net pe
-	assign pe = sig & ~sig_dly;            
-endmodule 

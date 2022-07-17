@@ -151,9 +151,10 @@ module UART_RX_CTRL#(	parameter CALC_DELAY = 1000,   // ciclos de reloj de esper
             end
 
             Trigger_TX_result: begin
-                               next_state = Wait_OP1_LSB;
-                               trigger = 1;
                                Op_selector = 2'b10;
+                            //    if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
+                                    trigger = 1;
+                                    next_state = Wait_OP1_LSB;
             end
              
             default : next_state = Wait_OP1_LSB;
