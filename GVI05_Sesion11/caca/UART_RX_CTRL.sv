@@ -27,7 +27,7 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
     input logic [7:0]rx_data,
     output logic trigger, Enter_ALU,
     output logic [15:0] Data_In,
-    output logic [15:0]LED
+    output logic [3:0]LED
 
     );
     
@@ -48,7 +48,7 @@ module UART_RX_CTRL#(	parameter INTER_BYTE_DELAY = 1000000,   // ciclos de reloj
             state <= next_state;
     end
     
-    assign LED[15:12] = state;
+    assign LED = state;
     
     always_comb begin
         next_state = state;
