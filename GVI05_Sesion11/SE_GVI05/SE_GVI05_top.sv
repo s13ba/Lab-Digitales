@@ -100,6 +100,7 @@ module SE_GVI05_top
 	logic	[ 3:0]	ALU_Flags;
 	logic	[15:0]	resultado;
 
+	logic [2:0]	ALU_status;
 	ALURPNconDriver ALU
 	(
 		.clk(CLK100MHZ),
@@ -113,7 +114,7 @@ module SE_GVI05_top
 		.Segments(Segments),       // solo segmentos, no considere el punto
 		.Anodes(AN),
 		.Flags(ALU_Flags),
-		.Status(),
+		.Status(ALU_status),
 		.resultado(resultado)
     );
     
@@ -135,6 +136,6 @@ module SE_GVI05_top
     );
 
 // LEDs: 4 MS para los estados del RX_CTRL y 4 LS para las flags de la ALU
-	assign LED = {RX_CTRL_status,rx_ready,7'd0,ALU_Flags};
+	assign LED = {RX_CTRL_status,2'd0,ALU_status,1'd0,Enter_ALU,1'd0,ALU_Flags};
 
 endmodule

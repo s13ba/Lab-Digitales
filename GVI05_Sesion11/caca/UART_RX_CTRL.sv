@@ -92,12 +92,14 @@ module UART_RX_CTRL#(	parameter CALC_DELAY = 1000,   // ciclos de reloj de esper
                            save2 = 1;
                            Op_selector = 2'b00;
                            if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
-				                        next_state = Wait_OP2_LSB;               
+				                        next_state = Wait_OP2_LSB;          
+                                        //test: 
+                                        Enter_ALU = 1;     
             end
             
             Wait_OP2_LSB: begin
-                        //   Op_selector = 2'b00;
-                          Enter_ALU = 1; // Para guardar y mostrar el operando A
+                          Op_selector = 2'b00;
+                        //   Enter_ALU = 1; // Para guardar y mostrar el operando A, ALU_status: 000 -> 010
                           if(rx_ready)
                             next_state = Store_OP2_LSB;                
             end
@@ -105,13 +107,13 @@ module UART_RX_CTRL#(	parameter CALC_DELAY = 1000,   // ciclos de reloj de esper
             Store_OP2_LSB: begin
                            OP2_LSB = rx_data;
                            save3 = 1;
-                           Op_selector = 2'b01;
+                        //    Op_selector = 2'b01;
                            if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
 				               next_state = Wait_OP2_MSB;
             end
             
             Wait_OP2_MSB: begin
-                          //Op_selector = 2'b01;
+                        //   Op_selector = 2'b01;
                           if(rx_ready)
                             next_state = Store_OP2_MSB;                 
             end
@@ -122,12 +124,14 @@ module UART_RX_CTRL#(	parameter CALC_DELAY = 1000,   // ciclos de reloj de esper
                            save4 = 1;
                            Op_selector = 2'b01;
                            if(hold_state_timer >= WAIT_FOR_REGISTER_DELAY)
-				               next_state = Wait_CMD;                        
+				               next_state = Wait_CMD;  
+                               //test: 
+                                Enter_ALU = 1;                         
             end
 
             Wait_CMD: begin
                       Op_selector = 2'b01;
-                      Enter_ALU = 1; // Guardar y mostrar operando B
+                    //   Enter_ALU = 1; // Guardar y mostrar operando B. ALU_status: 010-> 100
                       if(rx_ready)
                             next_state = Store_CMD;                
             end
@@ -147,7 +151,7 @@ module UART_RX_CTRL#(	parameter CALC_DELAY = 1000,   // ciclos de reloj de esper
             Delay_1_cycle: begin
                            next_state = Trigger_TX_result;
                            Op_selector = 2'b10;
-                        // if(hold_state_timer >= CALC_DELAY)
+                        if(hold_state_timer >= CALC_DELAY)
                                 next_state = Trigger_TX_result;
             end
 
