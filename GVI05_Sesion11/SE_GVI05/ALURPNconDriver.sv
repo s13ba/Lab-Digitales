@@ -117,7 +117,7 @@ module S7_actividad2 #(parameter N_DEBOUNCER = 5000000)(
 
     // Debouncer: Recibe Enter y retorna un pulso unico en Enter_deb
 
-//     logic Enter_deb;
+    logic Enter_deb;
 
 //     PB_Debouncer_FSM #     (
 //     .DELAY                 (N_DEBOUNCER)
@@ -129,6 +129,14 @@ module S7_actividad2 #(parameter N_DEBOUNCER = 5000000)(
 // 	    .PB_pressed_pulse     (Enter_deb), // solo nos interesa el pulso
 //         .PB_released_pulse    ()
 // );
+
+    // Parche para sesion 11: Pulso de Enter
+    pos_edge_det Enter_Debouncer ( 
+        .sig(Enter),        // Input signal for which positive edge has to be detected
+        .clk(clk),          // Input signal for clock
+        .pe(Enter_deb)      // Output signal that gives a pulse when a positive edge occurs
+        );    
+
 
     // Debouncer: Lo mismo pero para Undo
 
@@ -145,6 +153,10 @@ module S7_actividad2 #(parameter N_DEBOUNCER = 5000000)(
         .PB_released_pulse    ()
 );
 
+
+    
+
+
     // RPN: Recibe un pulso de Enter (Enter_deb) y un pulso de Undo (deb_undo) 
     //      Retorna estado, load A, B y OpCode, updateRes y ToDisplaySel
     logic LoadOpA, LoadOpB, LoadOpCode, updateRes, ToDisplaySel;
@@ -152,8 +164,8 @@ module S7_actividad2 #(parameter N_DEBOUNCER = 5000000)(
     ReversePolishFSM_Undo Reverse_Polish_FSM_Undo (
         .clk             (clk),
         .Reset           (reset),
-        // .Enter_pulse     (Enter_deb),
-        .Enter_pulse     (Enter),
+        .Enter_pulse     (Enter_deb),
+        // .Enter_pulse     (Enter),
         .deb_undo        (deb_undo),
         .Status          (Status),
         .LoadOpA         (LoadOpA),
@@ -1201,8 +1213,7 @@ module ReversePolishFSM_Undo(
                 LoadOpA = 1'b0;
                 LoadOpB = 1'b0;
                 LoadOpCode = 1'b0;
-                // ToDisplaySel = 1'b0;
-                 ToDisplaySel = 1'b0;
+                ToDisplaySel = 1'b0;
                 
                 updateRes = 1'b0;
                 if(Enter_pulse*~deb_undo)
@@ -1219,7 +1230,6 @@ module ReversePolishFSM_Undo(
                 LoadOpA = 1'b0;
                 LoadOpB = 1'b1;
                 LoadOpCode = 1'b0;
-                // ToDisplaySel = 1'b0;
                 ToDisplaySel = 1'b0;
                 updateRes = 1'b0;
                 next_state = S4;
@@ -1229,7 +1239,6 @@ module ReversePolishFSM_Undo(
                 LoadOpA = 1'b0;
                 LoadOpB = 1'b0;
                 LoadOpCode = 1'b0;
-                // ToDisplaySel = 1'b0;
                 ToDisplaySel = 1'b0;
                 updateRes = 1'b0;
                 if(Enter_pulse*~deb_undo)
@@ -1259,6 +1268,10 @@ module ReversePolishFSM_Undo(
                 ToDisplaySel = 1'b1;
                 updateRes = 1'b1;
                 next_state = S0;
+                // Removido el enter para pasar del display del resultado al estado S0
+                // En vola convenga devolverlo y hacer que la RX_CTRL 
+                // tire un enter antes de pedir el primer operando de nuevo, idk
+
                 // if(Enter_pulse*~deb_undo)
                 //     next_state = S0;
                 // else if(deb_undo*~Enter_pulse)
