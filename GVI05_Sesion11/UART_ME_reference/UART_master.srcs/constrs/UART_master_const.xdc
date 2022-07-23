@@ -10,8 +10,8 @@ create_clock -period 10.000 -name sys_clk_pin -waveform {0.000 5.000} -add [get_
 set_property -dict {PACKAGE_PIN C12 IOSTANDARD LVCMOS33} [get_ports reset_n]
 
 ## USB UART interface
-set_property -dict {PACKAGE_PIN D4 IOSTANDARD LVCMOS33} [get_ports uart_tx_usb]
-set_property -dict {PACKAGE_PIN C4 IOSTANDARD LVCMOS33} [get_ports uart_rx]
+# set_property -dict {PACKAGE_PIN D4 IOSTANDARD LVCMOS33} [get_ports uart_tx_usb]
+# set_property -dict {PACKAGE_PIN C4 IOSTANDARD LVCMOS33} [get_ports uart_rx]
 #set_property -dict {PACKAGE_PIN E5 IOSTANDARD LVCMOS33} [get_ports uart_cts]
 #set_property -dict {PACKAGE_PIN D3 IOSTANDARD LVCMOS33} [get_ports uart_rts]
 
@@ -113,8 +113,8 @@ set_property -dict {PACKAGE_PIN V17 IOSTANDARD LVCMOS33} [get_ports {leds[5]}]
 ##Pmod Header JD
 set_property -dict { PACKAGE_PIN H4    IOSTANDARD LVCMOS33 } [get_ports { uart_tx }]; #IO_L21N_T3_DQS_35 Sch=jd[1]
 set_property -dict { PACKAGE_PIN H1    IOSTANDARD LVCMOS33 } [get_ports { uart_tx_busy }]; #IO_L17P_T2_35 Sch=jd[2]
-#set_property -dict { PACKAGE_PIN G1    IOSTANDARD LVCMOS33 } [get_ports { JD[3] }]; #IO_L17N_T2_35 Sch=jd[3]
-#set_property -dict { PACKAGE_PIN G3    IOSTANDARD LVCMOS33 } [get_ports { JD[4] }]; #IO_L20N_T3_35 Sch=jd[4]
+set_property -dict { PACKAGE_PIN G1    IOSTANDARD LVCMOS33 } [get_ports { uart_rx }]; #IO_L17N_T2_35 Sch=jd[3]
+# set_property -dict { PACKAGE_PIN G3    IOSTANDARD LVCMOS33 } [get_ports { JD[4] }]; #IO_L20N_T3_35 Sch=jd[4]
 #set_property -dict { PACKAGE_PIN H2    IOSTANDARD LVCMOS33 } [get_ports { JD[7] }]; #IO_L15P_T2_DQS_35 Sch=jd[7]
 #set_property -dict { PACKAGE_PIN G4    IOSTANDARD LVCMOS33 } [get_ports { JD[8] }]; #IO_L20P_T3_35 Sch=jd[8]
 #set_property -dict { PACKAGE_PIN G2    IOSTANDARD LVCMOS33 } [get_ports { JD[9] }]; #IO_L15N_T2_DQS_35 Sch=jd[9]

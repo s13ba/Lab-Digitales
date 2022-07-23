@@ -27,7 +27,7 @@ module ME_top
 	input  logic               uart_rx,
 	output logic               uart_tx,
 	output logic               uart_tx_busy,
-	output logic               uart_tx_usb,
+	// output logic               uart_tx_usb,
 	
 	input  logic               button_c,
 	input  logic    [15:0]     switches,
@@ -53,7 +53,7 @@ module ME_top
 	always_ff @(posedge clk_100M)
 		reset_sr <= {reset_sr[0], ~reset_n};
 
-    assign uart_tx_usb = uart_tx;
+    // assign uart_tx_usb = uart_tx;
     //assign uart_rx = uart_rx;
     //assign uart_tx = uart_tx;
     assign uart_tx_busy = tx_busy;

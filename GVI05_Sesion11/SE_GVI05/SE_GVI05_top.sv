@@ -34,10 +34,12 @@ module SE_GVI05_top
 	output logic    [15:0]     LED,
 	
 	output  logic   [6:0]      Segments,
-    output  logic   [7:0]      AN
+    output  logic   [7:0]      AN,
+	output logic			   uart_rx_jd1
 );
 
-
+	// logic uart_rx_jd1;
+	assign uart_rx_jd1 = uart_rx;
 
     assign uart_tx_usb = uart_tx;
     assign uart_tx_busy = tx_busy;
