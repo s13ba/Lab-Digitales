@@ -23,7 +23,7 @@
 
 //Maximo: 32 bits
 
-module driver_7_seg#(parameter N = 16, count_max = 2)(
+module driver_7_seg#(parameter N = 32, count_max = 3)(
     input  logic        clock,
     input  logic        reset,
     input  logic [N-1:0]BCD_in,     // informacion a mostrar
@@ -97,26 +97,7 @@ module driver_7_seg#(parameter N = 16, count_max = 2)(
         .out(anodos)
         );
 
-    // Limitar numero de displays a encenderse
 
-    
-
-
-
-    // logic [7:0] controlAnodos;
-    // logic [3:0] LSBdeco_out;
-    // assign LSBdeco_out = anodos[3:0];
-    // assign controlAnodos = {4'b1111, LSBdeco_out};
-    
-    // always_comb begin
-    //     case (N)
-    //         16: anodos = controlAnodos;
-    //         32: anodos = anodos;
-        
-    //     default: anodos = anodos;
-    //     endcase
-    // end
-    
 endmodule
 
 // === Modulos auxiliares === //
@@ -271,9 +252,9 @@ module deco_binario_3_cold#(parameter N = 3)(
             'd2: out = 8'b11111011;
             'd3: out = 8'b11110111;
             'd4: out = 8'b11101111;
-            'd5: out = 8'b11011111;
-            'd6: out = 8'b10111111;
-            'd7: out = 8'b01111111;
+            'd5: out = 8'b11111111;
+            'd6: out = 8'b11111111;
+            'd7: out = 8'b11111111;
         endcase
 
     end
