@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 //Pregunta 5.2
-//Modificación del clock_divider, ahora con más tula! (y en base a frecuencias)
+//Modificación del clock_divider, ahora en base a frecuencias
 
 module Clock_divider_mod
 #(parameter FREC_OUT = 30.0,
